@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import CardContainer from '../productCard/CardContainer';
 import Carousel from './Carousel';
 import Navbar from '../navbar/Navbar';
+import Context from '../../context/Context';
 
 const Home = () => {
-
+    const {loadWishlist} = useContext(Context)
+    useEffect(() => {
+        loadWishlist()
+    }, [])
     return (
         <>
             <Navbar />

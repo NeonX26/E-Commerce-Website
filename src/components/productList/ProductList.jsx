@@ -20,7 +20,7 @@ const ProductList = () => {
                 const data = await response.json();
                 setProduct(data.products);
                 setLoading(false);
-                console.log(data.products)
+                // console.log(data.products)
             } catch (error) {
                 console.error("Error fetching product details:", error);
                 setLoading(false);
@@ -31,18 +31,29 @@ const ProductList = () => {
     }, []);
     return (
         <>
-        <Navbar />
-        <Box sx={{ display: 'flex', alignItems: 'center', mt:8, ml:10,width:'100%' }}>
-                  <Typography variant="body1" onClick={()=> Navigate('/')} sx={{cursor:'pointer'}}>HOME /</Typography>
-                  <Typography variant="body1" sx={{cursor:'pointer',textTransform: 'uppercase',ml:1}}> {category} </Typography>
-                </Box>
+            <Navbar />
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: { xs: 4, md: 8 }, pl: { xs: 2, md: 10 }, width: '100%' }}>
+                <Typography variant="body1" onClick={() => Navigate('/')} sx={{ cursor: 'pointer', fontSize: { xs: 12, md: 15 } }}>HOME /</Typography>
+                <Typography variant="body1" sx={{ cursor: 'pointer', textTransform: 'uppercase', fontSize: { xs: 12, md: 15 } }}> {category} </Typography>
+            </Box>
+
             {loading ? (
-                <CircularProgress />
+                 <Box
+                 sx={{
+                   display: "flex",
+                   alignItems: "center",
+                   justifyContent: "center",
+                   minHeight: "80vh",
+                   width: "100%",
+                 }}
+               >
+               <CircularProgress />
+               </Box>
             ) : product ? (
                 <Grid2 container justifyContent="center" flexDirection={'column'} sx={{ mx: { md: 5 }, mb: 2, backgroundColor: '#f5f5f5', my: 2 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
-                        <Typography variant="h4" sx={{ pl: 4, py: 2 }} >
+                        <Typography variant="h4" sx={{ pl: 4, py: 2, fontSize:{xs:'25px'} }} >
                             {category.toUpperCase()}
                         </Typography>
                     </Box>

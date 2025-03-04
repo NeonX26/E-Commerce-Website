@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState('')
+  const [address, setAddress] = useState('')
+  const [number, setNumber]= useState('')
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -35,7 +38,40 @@ const SignUp = () => {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
+
+    fetchUsers()
+
   };
+  const fetchUsers = async () => {
+    try {
+      // setLoading(true)
+      const response = await fetch('http://192.168.29.144:6300/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+          address: address,
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json()
+      console.log(data)
+      navigate('/signin')
+    }
+    catch (err) {
+      setError('There was an error with the request: ' + err.message);
+    } finally {
+      console.log('Done...')
+      // setLoading(false);
+    }
+  }
 
   return (
     <Box
@@ -54,7 +90,7 @@ const SignUp = () => {
             display: "flex",
             flexDirection: { xs: "column", sm: "row" },
             width: "100%",
-            maxWidth: "800px",
+            maxWidth: "100%",
             padding: "30px",
             backgroundColor: "#fff",
             borderRadius: "5px",
@@ -82,6 +118,16 @@ const SignUp = () => {
 
             <form onSubmit={handleSubmit} style={{ marginTop: "16px" }}>
               <TextField
+                label="Name"
+                type="name"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <TextField
                 label="Email"
                 type="email"
                 variant="outlined"
@@ -91,6 +137,27 @@ const SignUp = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
+              <TextField
+                label="Address"
+                type="name"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+              <TextField
+                label="Number"
+                type="number"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                required
+              />
+
 
               <TextField
                 label="Password"

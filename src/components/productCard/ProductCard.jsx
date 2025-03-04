@@ -29,14 +29,11 @@ const ProductCard = ({ image, title, price, id }) => {
           onClick={handleCardClick}
           sx={{
             objectFit: 'contain',
-            backgroundColor: '#f5f5f5',
+            backgroundColor: '#fff',
             height: { xs: 150, sm: 200, md: 220 },
           }}
 
         />
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button variant="outlined" color="primary" size="small" sx={{ width: '100%', mt: 1 }}>Add to Cart</Button>
-        </Box>
         <CardContent sx={{ padding: '8px' }}>
           <Typography variant="body1"
             sx={{

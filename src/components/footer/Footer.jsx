@@ -7,7 +7,7 @@ import PlayStore from "../../assets/PlayStore.png";
 const FooterWrapper = styled("div")({
   backgroundColor: "#232F3E",
   color: "#fff",
-  padding: "40px 0",
+  padding: "30px 0",
   marginTop: "auto",
 });
 
@@ -73,7 +73,7 @@ const Footer = () => {
 
         {/* Copyright Section */}
         <Typography variant="body2" align="center" marginTop={2}>
-          &copy; 2025 NeonX. All rights reserved.
+         Copyright &copy; 2025 NeonX. All rights reserved.
         </Typography>
       </Container>
     </FooterWrapper>

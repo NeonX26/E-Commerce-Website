@@ -19,7 +19,7 @@ const Carousel = () => {
     };
 
     return (
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", p: 5, width: "100%", display: { xs: "none", md: "block" } }}>
+        <Box sx={{ justifyContent: "center", alignItems: "center", p: 5, width: "100%", display: { xs: "none", md: "block" } }}>
             <Slider {...settings}>
                 <Box>
                     <img

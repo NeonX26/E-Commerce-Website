@@ -27,15 +27,16 @@ const CardContainer = ({ category, title, cardLimit,button }) => {
             <Grid2 container justifyContent="center" flexDirection={'column'} sx={{ mx: { md: 5 }, mb: 2, backgroundColor: '#f5f5f5', my: 2 }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
-                    <Typography variant="h4" sx={{ pl: 4, py: 2 }} >
+                    <Typography variant="h4" sx={{ pl: 4, py: 2,fontSize:{xs:'25px'} }} >
                         {title}
                         {title === 'Wishlist' ? `(${products.length})` : ''}
                     </Typography>
                     {
-                        button?<Button sx={{ mr: 4, my: 2 ,backgroundColor:'#DB4444'}} variant="contained"
+                        button?<Button sx={{ mr: 4, my: 2 ,backgroundColor:'#DB4444', fontSize:{xs:10}}} variant="contained"
                         onClick={() => {
                             navigate(`/product-list/${category}`);
-                        }}>View All</Button>: ''
+                        }}
+                        >View All</Button>: ''
                     }
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', pb: 2 }} gutterBottom>

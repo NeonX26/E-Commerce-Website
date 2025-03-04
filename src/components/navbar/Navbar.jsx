@@ -1,28 +1,21 @@
-import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton, InputBase, Badge, Menu, MenuItem, Typography, Hidden } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { AppBar, Toolbar, IconButton,  Badge, Menu, MenuItem, Typography,  } from "@mui/material";
 import { Search, ShoppingCart, AccountCircle, FavoriteBorder } from "@mui/icons-material";
-import { styled } from "@mui/system";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Box } from "@mui/system";
+import { useNavigate } from 'react-router-dom';
 import Context from "../../context/Context";
+import Profile from '../../components/profile/Profile'
 
-const SearchWrapper = styled("div")({
-  position: "relative",
-  borderRadius: "5px",
-  backgroundColor: "#f3f3f3",
-  marginRight: "20px",
-  width: "100%",
-  maxWidth: "600px",
-  display: "flex",
-  alignItems: "center",
-});
+
 
 const Navbar = (props) => {
   const Navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
   const { cart } = React.useContext(Context);
   const cartCount = cart.length;
+  const { user, loggedIn , setLoggedIn,wishCount} = useContext(Context);
 
+  // console.log(user.userInfo.name)
   const handleAccountMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -35,15 +28,11 @@ const Navbar = (props) => {
     setSearchQuery(e.target.value);
   };
 
+  // console.log(user.wishlists.length)
   return (
     <AppBar position="sticky" color="transparent" sx={{ boxShadow: "none", borderBottom: "1px solid #f3f3f3", backgroundColor: "#fff" }}>
-      <Toolbar>
-        {/* <img
-          src={logo}
-          alt="Amazon "
-          style={{ width: "150px", height: "auto" }}
-        /> */}
-        <Typography variant="h6" component="h1" style={{ flexGrow: 1 }} sx
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography variant="h6" component="h1" sx
           ={{
             color: "black",
             fontWeight: "bold",
@@ -54,54 +43,82 @@ const Navbar = (props) => {
           }}>
           NeonX
         </Typography>
+        {/* <TextField
+          value={searchQuery}
+          onChange={handleSearchChange}
+          variant="outlined"
+          size="small"
+          placeholder="Search..."
+          sx={{ width: '200px' }}  // Adjust width as needed
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <IconButton type="submit">
+                  <Search />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        /> */}
 
-        <Hidden smDown>
-          <SearchWrapper>
-            <InputBase
-              placeholder="Search for products, brands and more"
-              value={searchQuery}
-              onChange={handleSearchChange}
-              style={{ padding: "5px 10px", width: "100%" }}
-            />
-            <IconButton type="submit" style={{ padding: "10px" }}>
-              <Search />
-            </IconButton>
-          </SearchWrapper>
-        </Hidden>
-        <div style={{ flexGrow: 1 }}></div>
-        <IconButton color="inherit" onClick={() => Navigate('/wishlist')}>
-          <FavoriteBorder />
-        </IconButton>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" component="h1" sx={{ color: "black", fontWeight: "bold", fontSize: "0.8rem", letterSpacing: "2px", pl: "10px" }}>
+            {user ? `Hi,${user.userInfo.name}` : 'Login'}
+          </Typography>
+          <IconButton
+            color="inherit"
+            onClick={handleAccountMenu}
+            aria-controls="account-menu"
+            aria-haspopup="true"
+          >
+            <AccountCircle />
+          </IconButton>
+
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            {
+              loggedIn ?
+              <>
+                <MenuItem onClick={() => {
+                  handleMenuClose
+                  Navigate('/profile')
+                }}>Your Account</MenuItem>
+                <MenuItem onClick={()=>{
+                  setLoggedIn(false);
+                  handleMenuClose}}>Logout</MenuItem>
+                </> :
+
+                <MenuItem onClick={() => {
+                  handleMenuClose();
+                  Navigate('/signin');
+                }
+                }>Sign In</MenuItem>
+
+            }
+
+            {/* <MenuItem onClick={handleMenuClose}>Orders</MenuItem> */}
+
+            
+          </Menu>
+
+          <IconButton color="inherit" onClick={() => Navigate('/wishlist')}>
+            <Badge badgeContent={wishCount} color="error">
+              <FavoriteBorder />
+            </Badge>
+            {/* <FavoriteBorder /> */}
+          </IconButton>
 
 
-        <IconButton color="inherit" onClick={()=> Navigate('/cart')}>
-          <Badge badgeContent={cartCount} color="error">
-            <ShoppingCart />
-          </Badge>
-        </IconButton>
+          <IconButton color="inherit" onClick={() => Navigate('/cart')}>
+            <Badge badgeContent={cartCount} color="error">
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
 
-        <IconButton
-          color="inherit"
-          onClick={handleAccountMenu}
-          aria-controls="account-menu"
-          aria-haspopup="true"
-        >
-          <AccountCircle />
-        </IconButton>
-
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleMenuClose}
-        >
-          <MenuItem onClick={()=>{
-            handleMenuClose();
-            Navigate('/signin');
-          }
-          }>Sign In</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Your Account</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Orders</MenuItem>
-        </Menu>
+        </Box>
       </Toolbar>
     </AppBar>
   );
