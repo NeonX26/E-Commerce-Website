@@ -1,8 +1,43 @@
-# React + Vite
+# 🛒 E-Commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive e-commerce website built with **React**, styled using **Material UI**, and enhanced with features like carousels, routing, and smooth user experiences.
 
-Currently, two official plugins are available:
+> ⚠️ **Note:** This project is currently under active development. The backend functionality (APIs, authentication, database, etc.) is **not yet implemented**. Only the frontend is available at this stage.
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+
+- 🛍️ Product listing and details
+- 🔍 Search and filtering
+- 🛒 Add to cart functionality
+- 🧭 Client-side routing
+- 📱 Responsive UI with Material UI
+- 🎠 Product carousel with `react-slick`
+- 🌙 Dark mode support (optional)
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+- [React](https://reactjs.org/) (v18.3.1)
+- [React Router DOM](https://reactrouter.com/) (v7.1.5)
+- [Material UI](https://mui.com/) (`@mui/material`, `@mui/icons-material`, `@mui/styles`)
+- [Emotion](https://emotion.sh/docs/introduction) for styling (`@emotion/react`, `@emotion/styled`)
+- [React Slick](https://react-slick.neostack.com/) + [Slick Carousel](https://kenwheeler.github.io/slick/) for sliders
+
+---
+
+## 📦 Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/NeonX26/E-Commerce-Website.git
+cd E-Commerce-Website
+
+# Install packages
+npm install
+
+# Start the development server
+npm run dev
