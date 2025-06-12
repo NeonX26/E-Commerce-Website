@@ -2,6 +2,8 @@
 
 A modern, responsive e-commerce website built with **React**, styled using **Material UI**, and enhanced with features like carousels, routing, and smooth user experiences.
 
+> 🔗 [Preview](https://e-commerce-neonx26.vercel.app/)
+
 > ⚠️ **Note:** This project is currently under active development. The backend functionality (APIs, authentication, database, etc.) is **not yet implemented**. Only the frontend is available at this stage.
 ---
 
